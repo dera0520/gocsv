@@ -155,6 +155,15 @@ func MarshalCSVWithoutHeaders(in interface{}, out *SafeCSVWriter) (err error) {
 	return writeTo(out, in, true)
 }
 
+// MarshalString returns the CSV string from the interface.
+func MarshalStringWithoutHeaders(in interface{}) (out string, err error) {
+	bufferString := bytes.NewBufferString(out)
+	if err := MarshalWithoutHeaders(in, bufferString); err != nil {
+		return "", err
+	}
+	return bufferString.String(), nil
+}
+
 // --------------------------------------------------------------------------
 // Unmarshal functions
 
